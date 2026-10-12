@@ -1,0 +1,16 @@
+# Dépendances
+node_modules/
+
+# Secrets : ne jamais publier
+.env
+.env.*
+!.env.example
+
+# Logs et fichiers système
+npm-debug.log*
+*.log
+.DS_Store
+Thumbs.db
+
+# Éditeur
+.vscode/

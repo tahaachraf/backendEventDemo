@@ -10,8 +10,12 @@ const app = express()
 const origins = (process.env.FRONTEND_URL || 'http://localhost:5173').split(',').map((s) => s.trim())
 app.use(cors({ origin: origins }))
 app.use(express.json())
-app.use(eventRoute, userRoute)
-app.use(demoRoute) // démo lecture seule (GET /demo/users, GET /demo/evenements)
+
+// En démo (DEMO_READONLY=true), seules les routes GET /demo/* sont exposées
+if (process.env.DEMO_READONLY !== 'true') {
+  app.use(eventRoute, userRoute)
+}
+app.use(demoRoute)
 
 const port = process.env.PORT || 5000
 app.listen(port, () => { console.log('Server is running with port ' + port) })
